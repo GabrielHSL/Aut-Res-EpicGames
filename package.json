@@ -13,5 +13,8 @@
     "@faker-js/faker": "^7.6.0",
     "cypress": "^12.8.1",
     "faker": "^5.5.3"
+  },
+  "devDependencies": {
+    "@cypress/webpack-preprocessor": "^5.17.0"
   }
 }

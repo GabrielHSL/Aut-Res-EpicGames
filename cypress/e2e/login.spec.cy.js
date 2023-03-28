@@ -1,6 +1,7 @@
 /// <reference types="cypress" />
 
 var faker = require('faker');
+const perfil = require('../fixtures/perfil.json');
 
 context('Funcionalidade Login', () =>{
 
@@ -48,4 +49,29 @@ context('Funcionalidade Login', () =>{
 
     });
     
+    //Login com arquivo de dados
+
+    it.only('login válido via arquivo de dados', () => {
+       
+        cy.get('#username').type(perfil.usuario)
+        cy.get('#password').type(perfil.senha)
+        cy.get('.woocommerce-form > .button').click()
+        cy.get('#main').should('contain' , 'Endereço de e-mail desconhecido. Verifique novamente ou tente seu nome de usuário.')
+
+    });
+
+    it('login válido via fixtures', () => {
+        cy.fixture('perfil').then(dados => {
+            cy.get('#username').type(dados.usuario)
+            cy.get('#password').type(dados.senha, {log: false})
+            cy.get('.woocommerce-form > .button').click()
+            cy.get('#main').should('contain' , 'Endereço de e-mail desconhecido. Verifique novamente ou tente seu nome de usuário.')
+
+        })
+        
+
+    });
+
+
+
 })
